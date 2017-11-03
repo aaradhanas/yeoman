@@ -1,0 +1,29 @@
+<html>
+    <head>
+      <title>Sample Page to Demo Yeoman</title>
+    </head>
+    <body>
+      <h1 id="mainHeader"></h1>
+    </body>
+    <script type="text/javascript">
+      //So over here we are trying to create an IIFE to avoid one line of extra code.
+        (function loadDataFromExpressApp(){
+          var xhttp;
+          /*
+          * Old browers like IE5 and IE6 does not support XMLHttpRequest. :)
+          */
+          if(window.XMLHttpRequest){
+            xhttp = new XMLHttpRequest();
+          }else{
+            xhttp = new ActiveXObject('Microsoft.XMLHTTP');
+          }
+          xhttp.onreadystatechange = function(){
+            if(this.readyState === 4 && this.status === 200){
+              document.getElementById('mainHeader').innerHTML = xhttp.responseText;
+            }
+          };
+          xhttp.open('GET', '/data', true);
+          xhttp.send();
+        })();
+    </script>
+</html>
